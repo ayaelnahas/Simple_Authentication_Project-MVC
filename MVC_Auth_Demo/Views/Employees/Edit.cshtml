@@ -1,0 +1,51 @@
+﻿@model EmployeeViewModel
+@{
+    ViewBag.Title = ViewBag.Action;
+}
+
+<h2>Edit Employee</h2>
+<br />
+<br />
+
+
+@using (Html.BeginForm("Edit", "Employees", FormMethod.Post))
+{
+
+    @Html.HiddenFor(e => e.Employee.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(e=>e.Employee.Name)
+        @Html.EditorFor(e => e.Employee.Name)
+        @Html.ValidationMessageFor(e => e.Employee.Name)
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(e => e.Employee.Age)
+            @Html.TextBoxFor(e => e.Employee.Age, new { @class = "form-control" })
+            @Html.ValidationMessageFor(e => e.Employee.Age)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(e => e.Employee.Gender)
+            @Html.EnumDropDownListFor(e => e.Employee.Gender, new { @class = "form-control" })
+            @Html.ValidationMessageFor(e => e.Employee.Gender)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(e=>e.Departments)
+            @Html.DropDownListFor(e => e.Employee.Fk_DepartmentId, new SelectList(Model.Departments, "Id", "Name"),
+                        "select department", new { @class = "form-control" })
+            @Html.ValidationMessageFor(e => e.Employee.Fk_DepartmentId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(e => e.Employee.Email)
+            @Html.EditorFor(e => e.Employee.Email)
+            @Html.ValidationMessageFor(e => e.Employee.Email)
+        </div>
+        <div>
+            <input type="submit" value="save" class="btn btn-primary" />
+            <a href="/Employees/Index" class="btn btn-success">Back to list</a>
+        </div>
+
+}

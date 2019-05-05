@@ -1,0 +1,25 @@
+﻿@model Department
+
+<br />
+
+<h4>@Html.DisplayTextFor(e => e.Name) Details</h4>
+
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayTextFor(e => e.Id)</td>
+            <td>@Html.DisplayTextFor(e => e.Name)</td>
+        </tr>
+    </tbody>
+</table>
+<a href="/Departments/Index" class="btn btn-primary">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back to list
+</a>

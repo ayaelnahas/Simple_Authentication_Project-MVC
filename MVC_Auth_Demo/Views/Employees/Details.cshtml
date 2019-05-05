@@ -1,0 +1,33 @@
+﻿@model EmployeeViewModel
+
+<br />
+
+<h4>@Html.DisplayTextFor(e => e.Employee) Details</h4>
+
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayTextFor(e => e.Employee.Id)</td>
+            <td>@Html.DisplayTextFor(e => e.Employee.Name)</td>
+            <td>@Html.DisplayTextFor(e => e.Employee.Age)</td>
+            <td>@Html.DisplayTextFor(e => e.Employee.Gender)</td>
+            <td>@Html.DisplayTextFor(e => e.Employee.Email)</td>
+            <td>@Html.DisplayTextFor(e => e.Employee.Department.Name)</td>
+        </tr>
+    </tbody>
+</table>
+<a href="/Employees/Index" class="btn btn-primary">
+    <span class="glyphicon glyphicon-arrow-left"></span> Back to list
+</a>

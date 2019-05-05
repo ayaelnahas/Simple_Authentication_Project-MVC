@@ -1,0 +1,24 @@
+﻿@model EmployeeViewModel
+
+<h2>Edit Employee</h2>
+<br />
+<br />
+
+@using (Html.BeginForm("Edit", "Departments", FormMethod.Post))
+{
+    
+    @Html.HiddenFor(e => e.Department.Id)
+
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Department.Name)
+        @Html.EditorFor(e => e.Department.Name)
+        @Html.ValidationMessageFor(e => e.Department.Name)
+    </div>
+
+    <div>
+        <input type="submit" value="save" class="btn btn-primary" />
+        <a href="/Departments/Index" class="btn btn-success">Back to list</a>
+    </div>
+
+}

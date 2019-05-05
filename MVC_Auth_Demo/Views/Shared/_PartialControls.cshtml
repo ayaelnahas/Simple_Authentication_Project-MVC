@@ -1,0 +1,22 @@
+﻿@model int
+
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+@Html.ActionLink("Details", "Details", new { id = @Model }, new { @class = "btn btn-success btn-sm glyphicon glyphicon-eye-open" })
+
+@if (User.IsInRole("Admin"))
+{
+    <a href="/@controllerName/Edit/@Model" class="btn btn-primary btn-sm glyphicon glyphicon-pencil">Edit</a>
+    @Html.ActionLink("Delete", "Delete", new { id = @Model }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+
+}
+
+else if (User.IsInRole("Manager") && controllerName == "Employees")
+{
+    <a href="/@controllerName/Edit/@Model" class="btn btn-primary btn-sm glyphicon glyphicon-pencil">Edit</a>
+    @Html.ActionLink("Delete", "Delete", new { id = @Model }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+}
+

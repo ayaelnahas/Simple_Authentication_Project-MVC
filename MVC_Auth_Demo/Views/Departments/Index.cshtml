@@ -1,0 +1,101 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewBag.Title = "Departments";
+}
+
+<br />
+<br />
+<h2>Departments</h2>
+
+@*@if (Model.Employee == null || Model.Employees.Count == 0)
+    {
+        <h3>No Employees Found!</h3>
+    }*@
+
+<br />
+<br />
+
+@if (User.IsInRole("Admin") )
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add new department
+    </button>
+}
+
+<br />
+<br />
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @foreach (Department dept in Model.Departments)
+            {
+            <tr>
+                <td>@dept.Name</td>
+                <td>
+                    @Html.Partial("_PartialControls", @dept.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts{
+
+    <script src="~/Scripts/SiteScripts/DeleteDepartment.js"></script>
+    <script>
+        function AddSuccess() {
+
+            $('#myModal').modal('hide');
+            document.getElementById("form0").reset();
+        }
+    </script>
+}
+
+@{
+    var options = new AjaxOptions
+    {
+        Confirm = "Are you sure?",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "tbody",
+        OnSuccess = "AddSuccess"
+    };
+}
+
+
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Department</h4>
+            </div>
+            @using (Ajax.BeginForm(ViewBag.Action as string, "Departments", options))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.LabelFor(e=>e.Department.Name)
+                        @Html.EditorFor(e => e.Department.Name)
+                        @Html.ValidationMessageFor(e => e.Department.Name)
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="close" />
+                    <input type="submit" value="@ViewBag.Action" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
